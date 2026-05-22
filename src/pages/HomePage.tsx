@@ -287,7 +287,7 @@ export default function HomePage() {
                         />
                       </div>
                       <h2 className="text-3xl font-bold mt-8 mb-3 text-primary">{t('schoolName')}</h2>
-                      <p className="text-muted-foreground text-lg mb-6">{t('schoolTagline')}</p>
+                      <p className="text-muted-foreground text-lg mb-6 whitespace-nowrap">{t('schoolTagline')}</p>
 
                       <div className="grid grid-cols-2 gap-4">
                         <div className="bg-primary/5 rounded-xl p-4">

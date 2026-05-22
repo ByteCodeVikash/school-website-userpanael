@@ -41,7 +41,7 @@ export default function Header() {
               <h1 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
                 {t('headerSchoolName')}
               </h1>
-              <p className="text-sm font-medium text-gray-500">Bhairavnath, Varanasi</p>
+              <p className="text-sm font-medium text-gray-500">Birbhanpur, Varanasi</p>
             </div>
           </Link>
 

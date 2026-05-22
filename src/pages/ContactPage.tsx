@@ -20,16 +20,39 @@ export default function ContactPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Google Apps Script Web App URL (connected to Sheet ID: 1dBfTwcTdgPG1jTSZT2APvxSSN_-a9gwyflbMCFnDAZs)
+  const GOOGLE_SCRIPT_URL =
+    'https://script.google.com/macros/s/AKfycbygTQX2adbk85qAvdiyxb3kPjOL8A2idw8XD1wIf3vK7yMsG69GIp_vhMlBEUvd9Xbh/exec';
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      const params = new URLSearchParams({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        subject: formData.subject,
+        message: formData.message,
+        timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+      });
 
-    toast.success('Thank you for contacting us! We will get back to you soon.');
-    setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-    setIsSubmitting(false);
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString(),
+      });
+
+      toast.success('Thank you for contacting us! We will get back to you soon.');
+      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast.error('Something went wrong. Please try calling us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
