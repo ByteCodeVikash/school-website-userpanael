@@ -41,8 +41,7 @@ export default function ContactPage() {
       await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params.toString(),
+        body: params, // URLSearchParams auto-sets Content-Type correctly
       });
 
       toast.success('Thank you for contacting us! We will get back to you soon.');
